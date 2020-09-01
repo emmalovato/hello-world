@@ -1,17 +1,18 @@
 <template>
   <div class="trivia-round">
     <h1>{{ round }}</h1>
-    <h3>Question{{ questionNumTest }}</h3>
+    <h3>Question {{ questionNumTest }}</h3>
     <ul>
-      <p>Question Text</p>
+      <p>{{ sampleText }}</p>
       <img alt="Question image" :src="imgUrl">
     </ul>
   </div>
 </template>
 
 <script>
-module.exports = {
-  
+import axios from "axios"
+
+export default {
   name: 'TriviaRound',
   
   props: {
@@ -21,10 +22,23 @@ module.exports = {
   data: function () {
     return {
       // textUrl: 'https://emma-peterson-trivia.s3-us-west-1.amazonaws.com/round-1/questions/text/q1.txt',
+      sampleText: '',
       imgUrl: 'https://emma-peterson-trivia.s3-us-west-1.amazonaws.com/round-1/questions/images/q1.png',
       questionNumTest: 1
     }
   },
+
+  mounted() {
+    axios({ 
+        method: "GET", 
+        url: "https://emma-peterson-trivia.s3-us-west-1.amazonaws.com/round-1/questions/text/q1.txt"
+      })
+      .then(result => {
+        this.sampleText = result.data
+    }, error => {
+      console.error(error);
+    });
+  }
   
   //created: function () {
     // `this` points to the vm instance
