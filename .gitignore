@@ -3,6 +3,7 @@ node_modules
 /dist
 notes.txt
 package-lock.json
+round-metadata.json
 
 
 # local env files
