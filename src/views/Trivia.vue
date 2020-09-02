@@ -3,8 +3,8 @@
       <div id='trivia-image'/>
     <trivia-round 
         v-if="!loading && !errored"
-        :round="rounds[currentRoundNum - 1]"
-        :key="rounds[currentRoundNum - 1].id"
+        :round=currentRound
+        :key=currentRound.id
         :roundNum=currentRoundNum
     ></trivia-round>
   </div>
@@ -60,7 +60,7 @@ export default {
                 console.log(error)
             })
             .finally(() => {
-                this.currentRound = this.rounds[this.currentRoundNum]
+                this.currentRound = this.rounds[this.currentRoundNum-1]
                 this.loading = false
             })
     }
