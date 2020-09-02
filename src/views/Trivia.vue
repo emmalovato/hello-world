@@ -1,10 +1,12 @@
 <template>
   <div class="trivia">
-    <!-- img alt="Trivia image" src="../assets/trivia.png" -->
-
       <div id='trivia-image'/>
-
-    <trivia-round round="Test Round"/>
+    <trivia-round 
+        v-for="(round, index) in rounds"
+        :round=round
+        :key=round.id
+        :roundNum="index + 1"
+    ></trivia-round>
   </div>
 </template>
 
@@ -16,7 +18,25 @@ export default {
   name: 'Trivia',
   components: {
     TriviaRound
-  }
+  },
+  data: function () {
+    return {
+        rounds: [
+            {
+                id: 1,
+                type: 'visual',
+                title: 'Creatures',
+                numQuestions: 2
+            },
+            {
+                id: 2,
+                type: 'text',
+                title: 'Something else',
+                numQuestions: 0
+            }
+        ]
+    }
+  },
 }
 </script>
 
